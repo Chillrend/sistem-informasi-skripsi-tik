@@ -34,6 +34,11 @@ php artisan migrate
 
 and then do your shit things
 
+#### Running Locally
+```bash
+php artisan serve
+```
+
 ####Database Creation via Laravel Framework
 
 if you want to create a table for your work here is the steps :

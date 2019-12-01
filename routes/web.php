@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Auth::routes();
 
-Route::get('/submit_prop', function () {
-    return view('proposal');
-});
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/submit_prop', 'SubmitPropController@index')->name('submit_prop');
+Route::post('/gogo', ['as' => 'form_url', 'uses' => 'SubmitPropController@store']);
+Route::get('/searchDosbing', 'DosbingController@searchDosbing');

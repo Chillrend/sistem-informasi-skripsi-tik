@@ -13,13 +13,13 @@ class CreateProposalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('proposals', function (Blueprint $table) {
+        Schema::create('proposal', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("judul");
             $table->string("deskripsi");
-            $table->binary("abstrak")->nullable(true);
-            $table->integer("mahasiswa");
-            $table->integer("pembimbing");
+            $table->longText("abstrak")->nullable(true);
+            $table->string("mahasiswa");
+            $table->string("pembimbing");
             $table->timestamps();
         });
     }
