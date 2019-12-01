@@ -4,9 +4,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Mail\SendMail;
 use App\Proposal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -39,6 +41,9 @@ class SubmitPropController extends Controller
         $prop -> fill($request -> all());
         $prop -> mahasiswa = Auth::user()->email;
         $prop -> save();
-        return Redirect::to("submit_prop")->withSuccess('Great! Form successfully submit with validation.');
+
+        Mail::to($prop->pembimbing)->send(new SendMail($prop));
+
+        return Redirect::to("submit_prop")->with('message', 'Berhasil! langkah selanjutnya adalah : Berdoa supaya proposal diterima oleh panitian dan Dosbing :)');
     }
 }
