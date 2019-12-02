@@ -17,9 +17,3 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/submit_prop', 'SubmitPropController@index')->name('submit_prop');
 Route::post('/gogo', ['as' => 'form_url', 'uses' => 'SubmitPropController@store']);
 Route::get('/searchDosbing', 'DosbingController@searchDosbing');
-
-//
-Route::get('/mahasiswa','MahasiswaController@index');
-Route::post('/mahasiswa/store','MahasiswaController@store');
-Route::post('/mahasiswa/update','MahasiswaController@update');
-Route::get('/mahasiswa/hapus/{nim}','MahasiswaController@hapus');
