@@ -44,6 +44,6 @@ class SubmitPropController extends Controller
 
         Mail::to($prop->pembimbing)->send(new SendMail($prop));
 
-        return Redirect::to("submit_prop")->with('message', 'Berhasil! langkah selanjutnya adalah : Berdoa supaya proposal diterima oleh panitian dan Dosbing :)');
+        return Redirect::to("submit_prop")->with('message', 'Berhasil! langkah selanjutnya adalah : Berdoa supaya proposal diterima oleh panitia dan Dosbing :)');
     }
 }

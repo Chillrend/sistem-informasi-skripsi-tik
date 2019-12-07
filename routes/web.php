@@ -11,9 +11,10 @@
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/submit_prop', 'SubmitPropController@index')->name('submit_prop');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/submit_prop', 'SubmitPropController@index')->name('submit_prop')->middleware('verified');
 Route::post('/gogo', ['as' => 'form_url', 'uses' => 'SubmitPropController@store']);
 Route::get('/searchDosbing', 'DosbingController@searchDosbing');
