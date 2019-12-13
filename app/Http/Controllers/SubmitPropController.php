@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendMail;
 use App\Proposal;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -33,16 +34,18 @@ class SubmitPropController extends Controller
             'judul' => ['required', 'string', 'max:255'],
             'deskripsi' => ['required', 'string', 'max:255'],
             'abstrak' => ['required', 'string', 'min:50'],
-            'pembimbing' => ['required', 'email']
+            'pembimbing' => ['required', 'string']
         ]);
 
         $prop = new Proposal();
 
         $prop -> fill($request -> all());
-        $prop -> mahasiswa = Auth::user()->email;
+        $prop -> mahasiswa = Auth::user()->identifier;
         $prop -> save();
 
-        Mail::to($prop->pembimbing)->send(new SendMail($prop));
+        $palindrome = User::where('identifier', $prop->pembimbing)->first();
+
+        Mail::to($palindrome->email)->send(new SendMail($prop));
 
         return Redirect::to("submit_prop")->with('message', 'Berhasil! langkah selanjutnya adalah : Berdoa supaya proposal diterima oleh panitia dan Dosbing :)');
     }

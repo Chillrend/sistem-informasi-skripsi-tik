@@ -98,8 +98,8 @@
                         return {
                             results: $.map(response, item => {
                                 return {
-                                    text: item.name,
-                                    id: item.email,
+                                    text: item.identifier + " - " + item.name,
+                                    id: item.identifier,
                                 }
                             })
                         };

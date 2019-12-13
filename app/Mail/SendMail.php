@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,6 +13,8 @@ class SendMail extends Mailable
     use Queueable, SerializesModels;
 
     public $proposal;
+    public $sender;
+    public $receiver;
 
     /**
      * Create a new message instance.
@@ -21,6 +24,9 @@ class SendMail extends Mailable
     public function __construct($proposal)
     {
         $this->proposal = $proposal;
+
+        $this->sender = User::where('identifier', $proposal->mahasiswa)->first();
+        $this->receiver = User::where('identifier', $proposal->pembimbing)->first();
     }
 
     /**
